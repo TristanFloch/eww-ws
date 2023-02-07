@@ -5,6 +5,13 @@ import (
 	"fmt"
 )
 
+type Colors struct {
+	Focused string
+	Visible string
+	Urgent  string
+	Active  string
+}
+
 type Workspace struct {
 	IsFocused bool   `json:"is_focused"`
 	IsVisible bool   `json:"is_visible"`
@@ -12,6 +19,7 @@ type Workspace struct {
 	ID        int    `json:"id,omitempty"`
 	Name      string `json:"name,omitempty"`
 	Monitor   string `json:"monitor,omitempty"`
+	Color     string `json:"color,omitempty"`
 }
 
 type Workspaces struct {

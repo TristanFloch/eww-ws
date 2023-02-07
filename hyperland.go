@@ -20,6 +20,20 @@ func (h Hyperland) detect() bool {
 	return os.Getenv("HYPRLAND_INSTANCE_SIGNATURE") != ""
 }
 
+func set_color(w Workspace) string {
+	var c string
+	if w.IsFocused {
+		c = colors.Focused
+	} else if w.IsUrgent {
+		c = colors.Urgent
+	} else if w.IsVisible {
+		c = colors.Visible
+	} else {
+		c = colors.Active
+	}
+	return c
+}
+
 func (h Hyperland) listen() error {
 	h.sig = os.Getenv("HYPRLAND_INSTANCE_SIGNATURE")
 
@@ -61,6 +75,7 @@ func (h Hyperland) listen() error {
 			w.Active = int(ID)
 			for i, ws := range w.Workspaces {
 				w.Workspaces[i].IsFocused = ws.ID == int(ID)
+				w.Workspaces[i].Color = set_color(w.Workspaces[i])
 			}
 			w.toJson()
 		case "destroyworkspace":
@@ -71,6 +86,7 @@ func (h Hyperland) listen() error {
 			w.Workspaces = ws
 			for i, ws := range w.Workspaces {
 				w.Workspaces[i].IsFocused = ws.ID == w.Active
+				w.Workspaces[i].Color = set_color(w.Workspaces[i])
 			}
 			w.toJson()
 		case "createworkspace":
@@ -81,6 +97,7 @@ func (h Hyperland) listen() error {
 			w.Workspaces = ws
 			for i, ws := range w.Workspaces {
 				w.Workspaces[i].IsFocused = ws.ID == w.Active
+				w.Workspaces[i].Color = set_color(w.Workspaces[i])
 			}
 			w.toJson()
 		}
