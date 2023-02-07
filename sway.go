@@ -76,10 +76,12 @@ func (s Sway) getWorkspaces() ([]Workspace, error) {
 	swayWs, err := s.client.GetWorkspaces(context.Background())
 	for _, w := range swayWs {
 		ws = append(ws, Workspace{
-			IsActive: w.Focused,
-			ID:       int(w.Num),
-			Name:     w.Name,
-			Monitor:  w.Output,
+			IsActive:  w.Focused,
+			IsVisible: w.Visible,
+			IsUrgent:  w.Urgent,
+			ID:        int(w.Num),
+			Name:      w.Name,
+			Monitor:   w.Output,
 		})
 	}
 	return ws, err

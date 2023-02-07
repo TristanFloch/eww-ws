@@ -6,10 +6,12 @@ import (
 )
 
 type Workspace struct {
-	IsActive bool   `json:"is_active"`
-	ID       int    `json:"id,omitempty"`
-	Name     string `json:"name,omitempty"`
-	Monitor  string `json:"monitor,omitempty"`
+	IsActive  bool   `json:"is_active"`
+	IsVisible bool   `json:"is_visible"`
+	IsUrgent  bool   `json:"is_urgent"`
+	ID        int    `json:"id,omitempty"`
+	Name      string `json:"name,omitempty"`
+	Monitor   string `json:"monitor,omitempty"`
 }
 
 type Workspaces struct {
