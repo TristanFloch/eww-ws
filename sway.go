@@ -20,7 +20,7 @@ func (h WSEHandler) Workspace(ctx context.Context, evt sway.WorkspaceEvent) {
 		log.Fatal(err)
 	}
 	for _, w := range ws {
-		if w.IsActive {
+		if w.IsFocused {
 			active = w.ID
 		}
 	}
@@ -54,7 +54,7 @@ func (s Sway) listen() error {
 		return err
 	}
 	for _, w := range ws {
-		if w.IsActive {
+		if w.IsFocused {
 			active = w.ID
 		}
 	}
@@ -76,7 +76,7 @@ func (s Sway) getWorkspaces() ([]Workspace, error) {
 	swayWs, err := s.client.GetWorkspaces(context.Background())
 	for _, w := range swayWs {
 		ws = append(ws, Workspace{
-			IsActive:  w.Focused,
+			IsFocused: w.Focused,
 			IsVisible: w.Visible,
 			IsUrgent:  w.Urgent,
 			ID:        int(w.Num),

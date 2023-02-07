@@ -38,7 +38,7 @@ func (h Hyperland) listen() error {
 		Workspaces: ws,
 	}
 	for i, ws := range w.Workspaces {
-		w.Workspaces[i].IsActive = ws.ID == active
+		w.Workspaces[i].IsFocused = ws.ID == active
 	}
 
 	w.toJson()
@@ -60,7 +60,7 @@ func (h Hyperland) listen() error {
 			ID, _ := strconv.ParseInt(strings.Trim(parts[1], " \n"), 10, 64)
 			w.Active = int(ID)
 			for i, ws := range w.Workspaces {
-				w.Workspaces[i].IsActive = ws.ID == int(ID)
+				w.Workspaces[i].IsFocused = ws.ID == int(ID)
 			}
 			w.toJson()
 		case "destroyworkspace":
@@ -70,7 +70,7 @@ func (h Hyperland) listen() error {
 			}
 			w.Workspaces = ws
 			for i, ws := range w.Workspaces {
-				w.Workspaces[i].IsActive = ws.ID == w.Active
+				w.Workspaces[i].IsFocused = ws.ID == w.Active
 			}
 			w.toJson()
 		case "createworkspace":
@@ -80,7 +80,7 @@ func (h Hyperland) listen() error {
 			}
 			w.Workspaces = ws
 			for i, ws := range w.Workspaces {
-				w.Workspaces[i].IsActive = ws.ID == w.Active
+				w.Workspaces[i].IsFocused = ws.ID == w.Active
 			}
 			w.toJson()
 		}

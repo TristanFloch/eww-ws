@@ -6,7 +6,7 @@ import (
 )
 
 type Workspace struct {
-	IsActive  bool   `json:"is_active"`
+	IsFocused bool   `json:"is_focused"`
 	IsVisible bool   `json:"is_visible"`
 	IsUrgent  bool   `json:"is_urgent"`
 	ID        int    `json:"id,omitempty"`
