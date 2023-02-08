@@ -74,18 +74,7 @@ func (s Sway) listen() error {
 func (s Sway) getWorkspaces() ([]Workspace, error) {
 	ws := []Workspace{}
 	swayWs, err := s.client.GetWorkspaces(context.Background())
-	var c string
 	for _, w := range swayWs {
-		if w.Focused {
-			c = colors.Focused
-		} else if w.Urgent {
-			c = colors.Urgent
-		} else if w.Visible {
-			c = colors.Visible
-		} else {
-			c = colors.Active
-		}
-
 		ws = append(ws, Workspace{
 			IsFocused: w.Focused,
 			IsVisible: w.Visible,
@@ -93,7 +82,6 @@ func (s Sway) getWorkspaces() ([]Workspace, error) {
 			ID:        int(w.Num),
 			Name:      w.Name,
 			Monitor:   w.Output,
-			Color:     c,
 		})
 	}
 	return ws, err
